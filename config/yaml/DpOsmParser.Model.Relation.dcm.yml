@@ -1,0 +1,40 @@
+DpOsmParser\Model\Relation:
+  type: entity
+  table: relation
+  id:
+    _relationId:
+      type: integer
+      column: relationId
+  fields:
+    _version:
+      type: integer
+      column: version
+    _timestamp:
+      type: datetime
+      column: timestamp
+    _changeset:
+      type: integer
+      column: changeset
+    _multiPolygon:
+      type: multipolygon
+      column: multiPolygon
+  oneToMany:
+    _tags:
+      targetEntity: DpOsmParser\Model\RelationTag
+      mappedBy: _relation
+      cascade: [ALL]
+    _nodes:
+      targetEntity: DpOsmParser\Model\RelationNode
+      mappedBy: _relation
+      cascade: [ALL]
+    _ways:
+      targetEntity: DpOsmParser\Model\RelationWay
+      mappedBy: _relation
+      cascade: [ALL]
+    _relations:
+      targetEntity: DpOsmParser\Model\RelationRelation
+      mappedBy: _relationParent
+      cascade: [ALL]
+  #lifecycleCallbacks:
+    #prePersist: [ generateMultiPolygon ]
+    #preUpdate: [ generateMultiPolygon ]

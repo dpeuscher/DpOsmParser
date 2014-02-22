@@ -1,0 +1,28 @@
+DpOsmParser\Model\RelationRelation:
+  type: entity
+  table: relationMemberRelation
+  id:
+    _relationParent:
+      associationKey: true
+      column: relationParentId
+    _relationChild:
+      associationKey: true
+      column: relationChildId
+  fields:
+    _role:
+      type: string
+      column: role
+  manyToOne:
+    _relationParent:
+      targetEntity: DpOsmParser\Model\Relation
+      inversedBy: _relations
+      cascade: [ALL]
+      joinColumn:
+        name: relationParentId
+        referencedColumnName: relationId
+    _relationChild:
+      targetEntity: DpOsmParser\Model\Relation
+      cascade: [ALL]
+      joinColumn:
+        name: relationChildId
+        referencedColumnName: relationId

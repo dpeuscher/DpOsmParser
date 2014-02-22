@@ -1,0 +1,38 @@
+DpOsmParser\Model\Way:
+  type: entity
+  table: way
+  id:
+    _wayId:
+      type: integer
+      column: wayId
+  fields:
+    _version:
+      type: integer
+      column: version
+    _timestamp:
+      type: datetime
+      column: timestamp
+    _changeset:
+      type: integer
+      column: changeset
+    _lineString:
+      type: linestring
+      column: lineString
+  oneToMany:
+    _tags:
+      targetEntity: DpOsmParser\Model\WayTag
+      mappedBy: _way
+      cascade: [ALL]
+      joinColumn:
+        name: wayId
+        referencedColumnName: wayId
+    _wayNodes:
+      targetEntity: DpOsmParser\Model\WayNode
+      mappedBy: _way
+      cascade: [ALL]
+      joinColumn:
+        name: wayId
+        referencedColumnName: wayId
+  lifecycleCallbacks:
+    prePersist: [ generateLineString ]
+    preUpdate: [ generateLineString ]

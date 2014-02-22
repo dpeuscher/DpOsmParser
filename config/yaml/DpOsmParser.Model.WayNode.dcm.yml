@@ -1,0 +1,24 @@
+DpOsmParser\Model\WayNode:
+  type: entity
+  table: wayNode
+  id:
+    _way:
+      associationKey: true
+      column: wayId
+    _step:
+      type: integer
+      column: step
+  manyToOne:
+    _way:
+      targetEntity: DpOsmParser\Model\Way
+      inversedBy: _wayNodes
+      cascade: [ALL]
+      joinColumn:
+        name: wayId
+        referencedColumnName: wayId
+    _node:
+      targetEntity: DpOsmParser\Model\Node
+      cascade: [ALL]
+      joinColumn:
+        name: nodeId
+        referencedColumnName: nodeId

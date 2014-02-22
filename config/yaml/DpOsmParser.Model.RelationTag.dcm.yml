@@ -1,0 +1,22 @@
+DpOsmParser\Model\RelationTag:
+  type: entity
+  table: relationTag
+  id:
+    _relation:
+      associationKey: true
+      column: relationId
+    _key:
+      type: string
+      column: `key`
+  fields:
+    _value:
+      type: string
+      column: value
+  manyToOne:
+    _relation:
+      targetEntity: DpOsmParser\Model\Relation
+      inversedBy: _tags
+      cascade: [ ALL ]
+      joinColumn:
+        name: relationId
+        referencedColumnName: relationId

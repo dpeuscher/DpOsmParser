@@ -1,0 +1,37 @@
+DpOsmParser\Model\Node:
+  type: entity
+  table: node
+  id:
+    _nodeId:
+      type: integer
+      column: nodeId
+  fields:
+    _lat:
+      type: decimal
+      column: lat
+    _lon:
+      type: decimal
+      column: lon
+    _version:
+      type: integer
+      column: version
+    _timestamp:
+      type: datetime
+      column: timestamp
+    _changeset:
+      type: integer
+      column: changeset
+    _point:
+      type: point
+      column: point
+  oneToMany:
+    _tags:
+      targetEntity: DpOsmParser\Model\NodeTag
+      mappedBy: _node
+      cascade: [ALL]
+      joinColumn:
+        name: nodeId
+        referencedColumnName: nodeId
+  lifecycleCallbacks:
+      prePersist: [ generatePoint ]
+      preUpdate: [ generatePoint ]

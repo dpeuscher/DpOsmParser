@@ -1,0 +1,22 @@
+DpOsmParser\Model\WayTag:
+  type: entity
+  table: wayTag
+  id:
+    _way:
+      associationKey: true
+      column: wayId
+    _key:
+      type: string
+      column: `key`
+  fields:
+    _value:
+      type: string
+      column: value
+  manyToOne:
+    _way:
+      targetEntity: DpOsmParser\Model\Way
+      inversedBy: _tags
+      cascade: [ALL]
+      joinColumn:
+        name: wayId
+        referencedColumnName: wayId

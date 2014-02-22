@@ -1,0 +1,22 @@
+DpOsmParser\Model\NodeTag:
+  type: entity
+  table: nodeTag
+  id:
+    _node:
+      associationKey: true
+      column: nodeId
+    _key:
+      type: string
+      column: `key`
+  fields:
+    _value:
+      type: string
+      column: value
+  manyToOne:
+    _node:
+      targetEntity: DpOsmParser\Model\Node
+      inversedBy: _tags
+      cascade: [ALL]
+      joinColumn:
+        name: nodeId
+        referencedColumnName: nodeId
